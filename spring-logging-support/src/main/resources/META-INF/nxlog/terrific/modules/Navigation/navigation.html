@@ -1,0 +1,10 @@
+<div class="mod mod-navigation" data-connectors="1" data-items='[{"name":"Configure Loggers","url":"logging.html"},{"name":"Watch Logfiles","url":"files.html"},{"name":"Download Logfiles","url":"logs/download"}]' >
+    <script class="tpl-navi" type="text/x-dot-template">
+        <ul class="items nav nav-tabs">
+            {{~it :value:index}}
+            <li class="{{=value.classes}}" ><a href="{{=value.url}}">{{=value.name}}</a></li>
+            {{~}}
+        </ul>
+    </script>
+    <div class="items"></div>
+</div>

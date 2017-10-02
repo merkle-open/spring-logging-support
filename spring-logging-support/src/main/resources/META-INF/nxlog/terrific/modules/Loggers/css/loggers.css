@@ -1,0 +1,16 @@
+/* mod-loggers */
+@media screen {
+    .mod-loggers {
+        font-size: 12px;
+    }
+    .mod-loggers th {
+        font-size: 14px;
+        font-weight: normal;
+    }
+    .mod-loggers tbody {
+        font-size: 12px;
+    }
+    .mod-loggers tbody tr:hover {
+        background-color: #ddd;
+    }
+}

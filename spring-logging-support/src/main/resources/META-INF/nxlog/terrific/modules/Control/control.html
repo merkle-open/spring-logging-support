@@ -1,0 +1,21 @@
+<div class="mod mod-control" data-opts-url="logs/files" data-connectors="1">
+    <form data-action="tail">
+        <script class="tpl-opts" type="text/x-dot-template">
+            <select class="input form-control" data-field="file">
+                {{~it :value:index}}
+                <option value="{{=value}}">{{=value}}</option>
+                {{~}}
+            </select>
+        </script>
+        <div class="input-group ">
+            <div class="opts"></div>
+            <div class="input-group-btn">
+                <!-- Button and dropdown menu -->
+                <input type="button" value="Start" class="ctrl start btn btn-default " data-action="tail"/>
+                <input type="button" value="Stop" class="ctrl stop btn btn-default " data-action="stop"/>
+                <input type="button" value="Clear" class="ctrl clear btn btn-default " data-action="clear"/>
+                <input type="button" value="Download" class="download btn btn-default " data-href="logs/download?filename="/>
+            </div>
+        </div>
+    </form>
+</div>
