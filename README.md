@@ -13,7 +13,7 @@ This modules aims to provide a universal mechanism to configure logging configur
 ### Maven Dependency (Latest Version in `pom.xml`):
 
 	<dependency>
-		<groupId>com.namics.oss</groupId>
+		<groupId>com.namics.oss.spring.support.logging</groupId>
 		<artifactId>spring-logging-support</artifactId>
 		<version>1.0.0</version>
 	</dependency>
@@ -27,7 +27,7 @@ Java: JDK 8
 The user interface can be integrated with the spring boot starter.
 
 	<dependency>
-		<groupId>com.namics.oss</groupId>
+		<groupId>com.namics.oss.spring.support.logging</groupId>
 		<artifactId>spring-logging-support-starter</artifactId>
 		<version>1.0.0</version>
 	</dependency>

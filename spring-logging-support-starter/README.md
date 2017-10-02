@@ -7,12 +7,12 @@ Spring-Logging-Support module can be configured using Auto-Configuration. This d
 Add the dependency for the module itself (i.e. spring-logging-support) and the corresponding starter module (i.e. spring-logging-support-starter) which is responsible for the auto-configuration of the module.
 
     <dependency>
-        <groupId>com.namics.oss</groupId>
+        <groupId>com.namics.oss.spring.support.logging</groupId>
         <artifactId>spring-logging-support-starter</artifactId>
         <version>1.0.0</version>
     </dependency>
     <dependency>
-        <groupId>com.namics.oss</groupId>
+        <groupId>com.namics.oss.spring.support.logging</groupId>
         <artifactId>spring-logging-support</artifactId>
         <version>1.0.0</version>
     </dependency>
