@@ -4,7 +4,7 @@ System        | Status
 --------------|------------------------------------------------        
 CI master     | [![Build Status][travis-master]][travis-url]
 CI develop    | [![Build Status][travis-develop]][travis-url]
-Dependency    | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.namics.oss/spring-logging-support/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.namics.oss/spring-logging-support)
+Dependency    | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.namics.oss.spring.support.logging/spring-logging-support/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.namics.oss.spring.support.logging/spring-logging-support)
 
 This modules aims to provide a universal mechanism to configure logging configuration and get access to logfiles.
 
