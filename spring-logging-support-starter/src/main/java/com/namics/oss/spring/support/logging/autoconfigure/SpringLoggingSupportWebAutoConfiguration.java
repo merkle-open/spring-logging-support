@@ -32,7 +32,7 @@ public class SpringLoggingSupportWebAutoConfiguration {
 
 
 	@Bean
-	public ServletRegistrationBean configurationServlet() {
+	public ServletRegistrationBean springLoggingSupportWebServlet() {
 
 		AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
 		applicationContext.register(LoggingConfig.class);
