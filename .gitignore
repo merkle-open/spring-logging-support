@@ -97,3 +97,5 @@ crashlytics-build.properties
 
 secret/
 local.*
+
+codesigning.asc

@@ -1,0 +1,5 @@
+/* mod-tail */
+@media screen {
+    .mod-tail   			{}
+    .mod-tail .lines		{font-size:12px; font-face:monospace;height:80% ;  overflow : auto; }
+}

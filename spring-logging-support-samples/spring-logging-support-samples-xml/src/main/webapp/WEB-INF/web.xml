@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <!-- If using Servlet 3.0 async-support (recommend):
+         - configure version="3.0" on <web-app>
+         - configure schema location http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd  on <web-app>
+         - enable <async-supported>true</async-supported> on all servlet filters in chain
+         - enable <async-supported>true</async-supported> on logging servlet
+         - use logging-servlet-3.0.xml for servlet context
+     -->
+    <!-- If environment limited to Servlet 2.5:
+         - configure version="2.5" on <web-app>
+         - configure schema location http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd  on <web-app>
+         - remove <async-supported>true</async-supported> on all servlet filters in chain
+         - remove <async-supported>true</async-supported> on logging servlet
+         - use logging-servlet-2.5.xml for servlet context
+     -->
+
+    <!--  Configuration of the Spring-Logging-Support Servlet -->
+    <servlet>
+        <servlet-name>logging</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+        <!-- configure spring config for logging servlet
+            Default included in jar:
+            - Servlet 2.5 Version: classpath*:/META-INF/nxlog/spring/logging-servlet-2.5.xml
+            - Servlet 3.0 Version: classpath*:/META-INF/nxlog/spring/logging-servlet-3.0.xml
+            Or define custom for special requirements.
+        -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!-- <param-value>classpath*:/META-INF/nxlog/spring/logging-servlet-2.5.xml</param-value> -->
+            <param-value>classpath*:/META-INF/nxlog/spring/logging-servlet-3.0.xml</param-value>
+        </init-param>
+
+        <!-- configure path of your logfiles e.g. file:${catalina.base}/logs/ -->
+        <init-param>
+            <param-name>nxlog.base.path</param-name>
+            <param-value>file:${catalina.base}/logs/</param-value>
+        </init-param>
+        <load-on-startup>20</load-on-startup>
+        <async-supported>true</async-supported>
+        <!-- enable only for Servlet 3.0 spez. -->
+    </servlet>
+
+    <!-- Configure mapping for servlet.
+         CAREFUL: consider security configuration! -->
+    <servlet-mapping>
+        <servlet-name>logging</servlet-name>
+        <url-pattern>/nx-log/*</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
