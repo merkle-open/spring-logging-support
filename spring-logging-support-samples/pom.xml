@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.namics.oss.spring.support.logging</groupId>
         <artifactId>spring-logging-support-pom</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>spring-logging-support-samples</artifactId>
