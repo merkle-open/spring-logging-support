@@ -46,15 +46,14 @@ public class LogfilesController
 
 	private String zipFileName = "logfiles";
 
-	private String tailUrl;
+	private String tailUrl = "logs/tail?filename=";
 
 
-	public LogfilesController(Resource basePath, TailService tailService, String servletApiVersion) throws IOException
+	public LogfilesController(Resource basePath, TailService tailService) throws IOException
 	{
 		this.basePath = basePath;
 		this.tailService = tailService;
 		this.pathOffset = basePath.getFile().getAbsolutePath().length() + 1;
-		this.tailUrl = "logs/" + servletApiVersion + "/tail?filename=";
 	}
 
 	@PostConstruct
@@ -91,8 +90,8 @@ public class LogfilesController
 
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
 	public void downloadLogfiles(@RequestParam(required = false, value = "filename") String filename,
-								 OutputStream out,
-								 HttpServletResponse response) throws Exception
+	                             OutputStream out,
+	                             HttpServletResponse response) throws Exception
 	{
 		if (StringUtils.hasText(filename))
 		{
@@ -119,43 +118,13 @@ public class LogfilesController
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/3/tail", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/tail", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public DeferredResult<Collection<String>> tail(@RequestParam final String filename,
-												   @RequestParam(required = false, defaultValue = "0") long start) throws Exception
+	                                               @RequestParam(required = false, defaultValue = "0") long start) throws Exception
 	{
 		LOG.debug("tail -{}f {}", start, filename);
 		return this.tailService.tail(filename, start);
-	}
-
-	/**
-	 * Synchron method which returns a array of messages every time the for the filename is updated.
-	 *
-	 * @param filename
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/2/tail", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public Collection<String> synctail(@RequestParam final String filename,
-									   @RequestParam(required = false, defaultValue = "0") long start) throws Exception
-	{
-		LOG.debug("sync tail -{}f {}", start, filename);
-		DeferredResult<Collection<String>> deferred = this.tailService.tail(filename, start);
-
-		LegacyDeferredResultHandler<Collection<String>> handler = new LegacyDeferredResultHandler<Collection<String>>();
-		deferred.setResultHandler(handler);
-
-		Thread handlerThread = new Thread(handler);
-		handlerThread.start();
-		handlerThread.join(30000);
-		handler.stop();
-		Collection<String> result = handler.getResult();
-		if (result == null)
-		{
-			result = Collections.emptyList();
-		}
-		return result;
 	}
 
 	@ExceptionHandler(Exception.class)

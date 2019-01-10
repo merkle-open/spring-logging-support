@@ -26,7 +26,6 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import javax.inject.Named;
-import javax.servlet.ServletContext;
 import java.io.IOException;
 
 /**
@@ -65,12 +64,9 @@ public class LoggingConfig extends WebMvcConfigurationSupport
 	}
 
 	@Bean(name = "nxlogLogfilesController")
-	public LogfilesController logfilesController(@Named("nxlogBasePath") Resource basePath,
-												 ServletContext servletContext) throws IOException
+	public LogfilesController logfilesController(@Named("nxlogBasePath") Resource basePath) throws IOException
 	{
-		String servletApiVersion = Integer.toString(servletContext.getMajorVersion());
-		LOG.info("Use configuration for Servlet API version {}.x", servletApiVersion);
-		return new LogfilesController(basePath, tailService(basePath), servletApiVersion);
+		return new LogfilesController(basePath, tailService(basePath));
 	}
 
 	@Bean(name = "nxlogLog4jConfigController")
