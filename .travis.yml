@@ -9,26 +9,40 @@ env:
     - secure: "uSaQl8FrWKkMJrDy+Z0WjT7F0dADFnk1R0rBQvedmYNwW8vtFzJ3gLSq6smXVC9yrKqRHO6h8/iP7wXsb6gIU2wMRvDwiXLL/8vi9Cf80MSbxkl2PIdINX+OnIKySBOVT2pQU2bCaj/rS5I4OVzOghuoYn4O3r8Sayul9nERSEm7WAOshdDRF+MnQDxnryLCdtEJ8hD/wO8JR2Ex1ebElgKzKJJs78SDLLddV8wTiSIMyui96lhwC23KPPAio0n5pC296jjcc9VykzqJ7WIt/pPPK0paqEZpNh8hx3phqwm9YdC4uAA3oG2fGNOYc4UMtZXl9P79e9vv2YSkh37iaY3PoNJEsXoJ4xwHONj1x19Lu/ZdxiRWi1+1sOVarhmaCpI6LY3s3jO4SdnZmld7IBi9mjVyexAm3o3xU3P7NwZ62vOhrVruvMw7OjB9UyJZs2YTD33/gg+CDY14gJXORNPIFDLieKWeVjTGP169tMGpnCe7Utm6Dp3FebUSIkOM5ssjcK22iXRs6wFRmPDV2TRdXKIv+IbaCVPIfMRMqLJHfKjtUANnBPPi7AxSmbdsrwrZ+n+NV9z2eyhyW4niYLdMAvQUE5LivckTdWu82QuZ9WLHuinkU7KCClQxSc8H4WnPci8GQJL04Lxh2Ec0Mh9OBwFEiA77JdErI1UmX18="
     - # ^^ GPG_PASSPHRASE
     - secure: "Auhz2/0OtHu2DYPqFGUp2cWvgyJT1zsVjfaUcmJjaoOKEu0zI60YG9xyE6+C96W/LWtUwEMq16Kn+GZRnslHLgew43mB2n0DxuWcHT1tklbwCBkvqi7rnypKLsNMZEC5nHR7HR8/bKHm61T+9A91SIpi6iXuWfE71HwUPt88d9VzeNIUf2iodjMOyKcZixndmL868a2hKrzMOkBkhnZKH5BSVSE39G6EBNd1/qiFFCYFVEiCYZS8Q4Acri7Nb3bQBjK0YQ5yBweUvvJX9rHfpQYIGNMwFZqAmQA57mUb0hMl1/3vPYP98mDJ0Y528NLdsfTsKqFn6gWD0LAAe2Nz2ZkHka8hpbhx5KFEx2Ch8ZVuaOlLw8uXyzNAplH+XmrBxila1QPB068MajvjikaSajDJg4hntfCISwNiHGOhhCNls/ZeAK/W8P3Dw2i4MEgNFB+u9Wjy1qn261Pii0Y9kKQZntu6r5zf3EEwjgYAyQVloB9kVoFxS5usGGKaTEh1GytLttFqchUAtdkDCL4iiiE829edp5wTwctCDaECgI3s/76d3com0xlaOYFfIDiOjtrcJ05MdYQJm5NCZv1Xvm+2ML53iAIOWT2nCNqc+pomlnPikQLIZrl0LQPQtkYVKygUlDD9gAo/fisIHKR67Uo53ZHZcFQ8vOD9tYw/N8s="
-before_install:
-  - openssl aes-256-cbc -K $encrypted_e3bbf89066f0_key -iv $encrypted_e3bbf89066f0_iv -in codesigning.asc.enc -out codesigning.asc -d
-  - gpg --yes --batch --import codesigning.asc
+    - # ^^ GITHUB_TOKEN
+    - secure: "BRiLpW1lddg94OdgktcdubN2U0qszaXL8Bf5Hagu3oqY0KspKkFdN9cpdFiSRrzBlu3Z9BkfPxDzExvd4rHE+E1+yyXnYRIthkkHE042bmQzJSCDTSUxyncKfbN53L90VhldCPQD9Hk2vOCMTaPKg+abGr//G1R6j7fB9ggM5xZ1eE1YRTzhaJp2GsOA4Zud4+q/zwbSwkeVU00Be/G7MaGcYvHtIPBF6Z8vvdPCpCrqGfMhdZTZimWO+sUERuPbEiUHDOUKL5N0I2A0k+ibYJQw+zSswFJ3rZKPWgd4iGoM86+SXwXl26ao2obWf2KM8ox1ig4oJiYk1aPAsk05h7/4YCd63sVD80khBUQ81O19fgN2tyI4TY2CrRY/Irr0H6cY9sMBVIjPEiilZN/HEE7BBIlemcx1uDedHRfzW4pqYcHk7AhAqCsz4auEKqoT1MOlZB0hZxDxDFgmVU/yt1E/MUqTZ3sL19DoNeMnIqlJTSVi6Zt3p2oLyBWf0imisExNYvG2Azzuy9vDtw2RSlhVn/eTcKDF8TmcfFQ7wNhMSLzRPeIEaTK153jtkfYn3p/mXCdbHRe4ivhFVO1tUZrhN8CfsNTTtQ0LEs9y1IoOZHIJRWW6XJGsfWiCj+BcbK+qYf7oBTljHFk1e8qXsuwqwENh1eabLebto2HbY2o="
 jdk:
   - oraclejdk8
-install: mvn clean install -P !ossrh -DskipTests=true -Dmaven.javadoc.skip=true -B -V -U
-script:
-- mvn deploy -P ossrh --settings mvnsettings.xml
+before_install:
+  - source ci/setup-git.sh
+install: mvn clean install -P !ossrh -DskipTests=true -Dmaven.javadoc.skip=true -B -V -U  --settings ci/mvnsettings.xml
+script: mvn verify -P !ossrh -B --settings ci/mvnsettings.xml
+after_failure:
+  - find . -size +1k -regex  ".*/surefire-reports/.*\.txt" -exec cat {} +
 cache:
   directories:
     - ~/.m2/repository
-branches:
-  only:
-    - master
-    - develop
-    - /^feature.*/
-    - /^hotfix.*/
 notifications:
   email:
-    on_success: change
-    on_failure: change
-after_failure:
-  - find . -size +1k -regex  ".*/surefire-reports/.*\.txt" -exec cat {} +
+    on_success: never
+    on_failure: never
+deploy:
+  - provider: script
+    skip-cleanup: true
+    script: bash ci/mvn-release.sh
+    on:
+      branch: master
+  - provider: script
+    skip-cleanup: true
+    script: bash ci/mvn-deploy.sh
+    on:
+      branch: develop
+  - provider: script
+    skip-cleanup: true
+    script: bash ci/mvn-deploy.sh
+    on:
+      tags: true
+addons:
+  apt:
+    packages:
+    - libxml2-utils
